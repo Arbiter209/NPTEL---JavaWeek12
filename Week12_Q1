@@ -1,0 +1,191 @@
+/*Complete the code to develop an extended version of the ADVANCED CALCULATOR with added special functions that emulates all 
+the functions of the GUI Calculator as shown in the image.*/
+
+import java.util.Scanner;
+public class Question121
+{
+	public static void main(String args[])
+  {
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+    // Write code below
+    int l = input.length();
+		int i;
+    double num1=0,num2=0;
+		String str="",str2="";
+		double result=0.0;
+		char ch,ch1,oper='Z';
+		ch = input.charAt(l-1);
+    if(ch=='d')
+    {
+			for(i=0;i<l-1;i++)
+      {
+        ch1 = input.charAt(i);
+        if(ch1=='t'||ch1=='h'||ch1=='l'||ch1=='p')
+        {
+          oper = ch1;
+          str = input.substring(0,i);
+          str2 = input.substring(i+1,l-1);
+          break;
+        }
+      }
+      int l1,l2;
+      l1 = str.length();l2 = str2.length();
+      double k=10;
+      double m=10.0;double pp=1.0;
+      int kk=0;
+      for(i=0;i<l1;i++)
+      {
+        char chr = str.charAt(i);
+        char xc = gui_map(chr);
+        if(xc=='.')
+        {
+          k=1.0/10;
+          m=1.0;
+        }
+        else
+        {
+          double x = (double)(Integer.parseInt(String.valueOf(xc)));
+          if(m==1.0)
+          {
+            for(int ii=0;ii<=kk;ii++)
+            {
+              pp=pp*k;
+            }
+            x=x*pp;
+          }
+          num1 = (num1*m)+x;
+        }
+      }
+      k=1; m=10.0; pp=1.0;
+      kk=0;
+      for(i=0;i<l2;i++)
+      {
+        char chr2 = str2.charAt(i);
+        char xz = gui_map(chr2);
+        if(xz=='.')
+        {
+          k=1.0/10;
+          m=1.0;
+        }
+        else
+        {
+          double xy = (double)(Integer.parseInt(String.valueOf(xz)));
+          if(m==1.0)
+          {
+            //pp = pp*k*xy;
+            for(int ii=0;ii<=kk;ii++)
+            {
+              pp=pp*k;
+            }
+            xy=xy*pp;
+          }
+          num2 = (num2*m)+xy;
+        }
+      }
+      switch(oper)
+      {
+        case 'h':
+          result = num1+num2;
+          break;
+        case 'l':
+          result = num1-num2;
+          break;
+        case 'p':
+          result = num1*num2;
+          break;
+        case 't':
+          result = ((double)(num1))/num2;
+          break;
+        case 's':
+          input = "";
+          break;      
+      }
+      System.out.print(result);        
+    }
+    else if(ch=='a'|| ch=='q'|| ch=='r')
+    {
+      int l1=input.length();          
+      String str1 = input.substring(0,l1-1);
+      double k=10;
+      double m=10.0;double pp=1.0;
+      int kk=0;
+      for(i=0;i<l1-1;i++)
+      {
+        char chr = str1.charAt(i);
+        char xc = gui_map(chr);
+        if(xc=='.')
+        {
+          k=1.0/10;
+          m=1.0;
+        }
+        else
+        {
+          double x = (double)(Integer.parseInt(String.valueOf(xc)));
+          if(m==1.0)
+          {
+            for(int ii=0;ii<=kk;ii++)
+            {
+              pp=pp*k;
+            }
+            x=x*pp;
+          }
+          num1 = (num1*m)+x;
+        }
+      }
+			if (ch=='a')
+        System.out.print(Math.sqrt(num1));
+      if (ch=='q')
+        System.out.print(Math.pow(num1,2));
+      if (ch=='r')
+        System.out.print(1/num1);       
+    }       
+		else
+    {
+      System.out.print("");
+    }
+  }// The main() method ends here.
+	
+// A method that takes a character as input and returns the corresponding GUI character
+	static char gui_map(char in)
+  {
+		char out = 'N';// N = Null/Empty
+		char gm[][]={{'a','R'}
+					      ,{'b','0'}
+					      ,{'c','.'}
+					      ,{'d','='}
+					      ,{'e','1'}
+					      ,{'f','2'}
+					      ,{'g','3'}
+					      ,{'h','+'}
+					      ,{'i','4'}
+					      ,{'j','5'}
+					      ,{'k','6'}
+					      ,{'l','-'}
+					      ,{'m','7'}
+					      ,{'n','8'}
+					      ,{'o','9'}
+					      ,{'p','*'}
+					      ,{'q','S'}
+					      ,{'r','F'}
+					      ,{'s','C'}
+					      ,{'t','/'}};
+					
+       /* R = Square root
+					C = Clear/Restart
+					F = Fraction
+					S = Square
+					*/
+					
+		// Checking for maps
+		for(int i=0; i<gm.length; i++)
+    {
+			if(gm[i][0]==in)
+      {
+				out=gm[i][1];
+				break;
+			}
+		}
+		return out;
+	}
+}
